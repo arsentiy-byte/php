@@ -54,8 +54,5 @@ RUN addgroup -g $WORKER_UID -S app && \
 # Установка прав на рабочую директорию
 RUN chown -R app:app /app
 
-# Переключение на пользователя app
-USER app
-
 # Установка entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
