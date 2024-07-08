@@ -25,9 +25,8 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMAGE_NAME: php
-          TAG_NAME: ${{ steps.extract_version.outputs.version }}
+          IMAGE_NAME: arsentiyzhunussov/php
+          TAG_NAME: 8.2-fpm-alpine
         run: |
           docker build -t $IMAGE_NAME:$TAG_NAME .
-          docker tag $IMAGE_NAME:$TAG_NAME $DOCKER_USERNAME/$IMAGE_NAME:$TAG_NAME
-          docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG_NAME
+          docker push $IMAGE_NAME:$TAG_NAME
