@@ -11,6 +11,8 @@ RUN apk add --no-cache --update \
     libxml2-dev \
     oniguruma-dev \
     supervisor \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
     && docker-php-ext-install pdo pdo_pgsql pcntl \
     && pecl install apcu \
     && docker-php-ext-enable apcu opcache \
