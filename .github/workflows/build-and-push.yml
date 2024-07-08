@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMAGE_NAME: arsentiyzhunussov/php
+          IMAGE_NAME: php
           TAG_NAME: ${{ steps.extract_version.outputs.version }}
         run: |
           docker build -t $IMAGE_NAME:$TAG_NAME .
