@@ -10,7 +10,7 @@ RUN apk add --no-cache --update \
     shadow \
     libxml2-dev \
     oniguruma-dev \
-    && docker-php-ext-install pdo pdo_pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pcntl \
     && pecl install apcu \
     && docker-php-ext-enable apcu opcache \
     && rm -rf /var/cache/apk/*
