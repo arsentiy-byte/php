@@ -1,0 +1,33 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - 'php-*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Determine PHP version from branch name
+        id: extract_version
+        run: echo "::set-output name=version::${GITHUB_REF#refs/heads/php-}"
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        env:
+          IMAGE_NAME: arsentiyzhunussov/php
+          TAG_NAME: ${{ steps.extract_version.outputs.version }}-fpm-alpine
+        run: |
+          docker build -t $IMAGE_NAME:$TAG_NAME .
+          docker tag $IMAGE_NAME:$TAG_NAME $DOCKER_USERNAME/$IMAGE_NAME:$TAG_NAME
+          docker push $DOCKER_USERNAME/$IMAGE_NAME:$TAG_NAME
