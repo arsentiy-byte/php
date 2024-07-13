@@ -10,10 +10,13 @@ RUN apk add --no-cache --update \
     shadow \
     libxml2-dev \
     oniguruma-dev \
+    icu-dev \
+    zlib-dev \
+    libzip-dev \
     supervisor \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && docker-php-ext-install pdo pdo_pgsql pcntl \
+    && docker-php-ext-install pdo pdo_pgsql pcntl intl zip \
     && pecl install apcu \
     && docker-php-ext-enable apcu opcache \
     && rm -rf /var/cache/apk/*
